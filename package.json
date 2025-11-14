@@ -1,0 +1,35 @@
+{
+  "name": "ai-next-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Basic Express server returning a Hello World page",
+  "scripts": {
+    "dev": "next dev -p 3030",
+    "build": "next build",
+    "start": "next start -p 3030"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@mantine/core": "^7.10.0",
+    "@mantine/hooks": "^7.10.0",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.6.0",
+    "next": "^14.2.0",
+    "openai": "^6.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "swagger-ui": "^5.30.2",
+    "swagger-ui-react": "^5.30.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.0",
+    "@types/react": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}
