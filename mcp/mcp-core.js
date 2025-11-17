@@ -83,6 +83,8 @@ export function createMcpServer() {
             const restaurantid = args?.restaurantid ?? args?.input?.restaurantid;
             const id = String(restaurantid || '').toLowerCase();
 
+            console.error('id', id);
+
             const detailsById = {
                 bord27: {
                     overview: 'Bord 27 är en modern restaurang inspirerad av södra Europa...',
@@ -102,6 +104,8 @@ export function createMcpServer() {
                     faq: [{ q: 'Har ni veganska alternativ?', a: 'Ja, vi erbjuder flera.' }]
                 }
             };
+
+            console.error('detailsById', detailsById[id]);
 
             const payload = detailsById[id];
             if (!payload) {
