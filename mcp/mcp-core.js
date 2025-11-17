@@ -224,5 +224,29 @@ export function createMcpServer() {
         }
     );
 
+    server.registerTool(
+        'get_today',
+        {
+            title: 'Get today',
+            description: 'Returnerar aktuellt datum i formatet YYYYMMDD',
+            inputSchema: z.object({})
+        },
+        async () => {
+            const now = new Date();
+            const yyyy = String(now.getFullYear());
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const today = `${yyyy}${mm}${dd}`;
+            return {
+                content: [
+                    {
+                        type: 'text',
+                        text: JSON.stringify({ today })
+                    }
+                ]
+            };
+        }
+    );
+
     return server;
 }
