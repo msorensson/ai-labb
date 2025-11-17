@@ -80,8 +80,8 @@ export function createMcpServer() {
         },
         async (args) => {
             // Stöd både args.restaurantId och args.input.restaurantId beroende på klient
-            const restaurantId = args?.restaurantId ?? args?.input?.restaurantId;
-            const id = String(restaurantId || '').toLowerCase();
+            const restaurantid = args?.restaurantid ?? args?.input?.restaurantid;
+            const id = String(restaurantid || '').toLowerCase();
 
             const detailsById = {
                 bord27: {
