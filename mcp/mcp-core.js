@@ -88,21 +88,34 @@ export function createMcpServer() {
 
             const detailsById = {
                 bord27: {
-                    overview: 'Bord 27 är en modern restaurang inspirerad av södra Europa...',
+                    overview: 'Bord 27 är en modern restaurang inspirerad av Skandinavien och Europa...',
                     facts: [
                         'Vi har vedugn.',
-                        'Restaurangen ligger på Östra Larmgatan 19.',
-                        'Vi erbjuder brunch på helgerna.',
-                        'Vi har 70 sittplatser.'
+                        'Restaurangen ligger på Haga kyrkogata 14.',
+                        'Vi erbjuder lunch och middag på helgerna.',
+                        'Vi har 36 sittplatser.',
+                        'Vi har ett brett utbud av vin och öl.',
+                        'hundvänligt',
+                        'reservation rekommenderas'
                     ],
                     hours: {
-                        weekday: '11–23',
-                        weekend: '10–01'
+                        monday: '17–23',
+                        tuesday: '17–23',
+                        wednesday: '17–23',
+                        thursday: '17–23',
+                        friday: '17–01',
+                        saturday: '11-01',
+                        sunday: '11-23',
+                        '2025-11-20': 'closed'
                     },
                     menu: {
-                        highlights: ['Pizza Napoletana', 'Pasta med tryffel', 'Vitello tonnato']
+                        highlights: ['Råbiff', 'Creme brulée']
                     },
-                    faq: [{ q: 'Har ni veganska alternativ?', a: 'Ja, vi erbjuder flera.' }]
+                    faq: [
+                        { q: 'Har ni veganska alternativ?', a: 'Ja, vi erbjuder flera.' },
+                        { q: 'Har ni glutenfritt alternativ?', a: 'Ja, vi erbjuder flera.' },
+                        { q: 'Får man ha hund med sig?', a: 'Ja, hund är inga problem.' }
+                    ]
                 }
             };
 
@@ -161,7 +174,7 @@ export function createMcpServer() {
                 ],
                 dinner: [
                     { '1700': '17:00' },
-                    { '1715': '1715' },
+                    { '1715': '17:15' },
                     { '1730': '17:30' },
                     { '1800': '18:00' },
                     { '1830': '18:30' }
