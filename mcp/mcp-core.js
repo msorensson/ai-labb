@@ -79,6 +79,7 @@ export function createMcpServer() {
             })
         },
         async (args) => {
+            console.error('args', args);
             // Stöd både args.restaurantId och args.input.restaurantId beroende på klient
             const restaurantid = args?.restaurantid ?? args?.input?.restaurantid;
             const id = String(restaurantid || '').toLowerCase();
