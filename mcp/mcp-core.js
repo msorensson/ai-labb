@@ -187,5 +187,42 @@ export function createMcpServer() {
         }
     );
 
+    server.registerTool(
+        'insert_booking',
+        {
+            title: 'Insert booking',
+            description:
+                'Skapar en bokning (mock). Tar restaurantid, date (YYYYMMDD) och timeslot (t.ex. 1700). Returnerar en bekräftelse.',
+            inputSchema: z.object({
+                restaurantid: z.string(),
+                date: z.string().regex(/^\d{8}$/, 'format YYYYMMDD'),
+                timeslot: z.string()
+            })
+        },
+        async (args) => {
+            const restaurantid = args?.restaurantid ?? args?.input?.restaurantid;
+            const date = args?.date ?? args?.input?.date;
+            const timeslot = args?.timeslot ?? args?.input?.timeslot;
+
+            const bookingId = `bk_${Math.random().toString(36).slice(2, 10)}`;
+            const payload = {
+                bookingId,
+                restaurantid,
+                date,
+                timeslot,
+                status: 'confirmed'
+            };
+
+            return {
+                content: [
+                    {
+                        type: 'text',
+                        text: JSON.stringify(payload)
+                    }
+                ]
+            };
+        }
+    );
+
     return server;
 }
