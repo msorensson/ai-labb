@@ -131,5 +131,61 @@ export function createMcpServer() {
         }
     );
 
+    server.registerTool(
+        'get_bookable_timeslots',
+        {
+            title: 'Get bookable timeslots',
+            description:
+                'Returnerar bokningsbara tidsslottar för en restaurang och dag. Output är en array av objekt, t.ex. {\"1700\":\"17:00\"}.',
+            inputSchema: z.object({
+                restaurantid: z.string(),
+                date: z.string().regex(/^\d{8}$/, 'format YYYYMMDD'),
+                mealtype: z.string()
+            })
+        },
+        async (args) => {
+            const restaurantid = args?.restaurantid ?? args?.input?.restaurantid;
+            const date = args?.date ?? args?.input?.date;
+            const mealtype = (args?.mealtype ?? args?.input?.mealtype ?? '').toLowerCase();
+            const id = String(restaurantid || '').toLowerCase();
+
+            // Mockade tider för bord27
+            // Format: array av objekt: { "HHmm": "HH:mm" } (notera att JSON-nycklar alltid blir strängar)
+            const mockByMeal = {
+                lunch: [
+                    { '1100': '11:00' },
+                    { '1115': '11:15' },
+                    { '1130': '11:30' },
+                    { '1200': '12:00' },
+                    { '1230': '12:30' }
+                ],
+                dinner: [
+                    { '1700': '17:00' },
+                    { '1715': '1715' },
+                    { '1730': '17:30' },
+                    { '1800': '18:00' },
+                    { '1830': '18:30' }
+                ]
+            };
+
+            let payload = [];
+            if (id === 'bord27') {
+                // För enkelhet: returnera samma slots oavsett datum, differentiera på mealtype
+                payload = mockByMeal[mealtype] ?? [...mockByMeal.lunch, ...mockByMeal.dinner];
+            } else {
+                payload = []; // okänd restaurang → inga tider
+            }
+
+            return {
+                content: [
+                    {
+                        type: 'text',
+                        text: JSON.stringify({ restaurantid, date, mealtype, timeslots: payload })
+                    }
+                ]
+            };
+        }
+    );
+
     return server;
 }
