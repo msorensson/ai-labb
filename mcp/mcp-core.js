@@ -75,7 +75,7 @@ export function createMcpServer() {
             title: 'Get restaurant details',
             description: 'Returnerar strukturerad data om en restaurang utifrån restaurantId',
             inputSchema: z.object({
-                restaurantId: z.string()
+                restaurantid: z.string()
             })
         },
         async (args) => {
@@ -109,7 +109,7 @@ export function createMcpServer() {
                     content: [
                         {
                             type: 'text',
-                            text: JSON.stringify({ error: 'Restaurant not found', restaurantId })
+                            text: JSON.stringify({ error: 'Restaurant not found', restaurantid })
                         }
                     ]
                 };
