@@ -69,5 +69,62 @@ export function createMcpServer() {
         }
     );
 
+    server.registerTool(
+        'get_restaurant_details',
+        {
+            title: 'Get restaurant details',
+            description: 'Returnerar strukturerad data om en restaurang utifrån restaurantId',
+            inputSchema: z.object({
+                restaurantId: z.string()
+            })
+        },
+        async (args) => {
+            // Stöd både args.restaurantId och args.input.restaurantId beroende på klient
+            const restaurantId = args?.restaurantId ?? args?.input?.restaurantId;
+            const id = String(restaurantId || '').toLowerCase();
+
+            const detailsById = {
+                bord27: {
+                    overview: 'Bord 27 är en modern restaurang inspirerad av södra Europa...',
+                    facts: [
+                        'Vi har vedugn.',
+                        'Restaurangen ligger på Östra Larmgatan 19.',
+                        'Vi erbjuder brunch på helgerna.',
+                        'Vi har 70 sittplatser.'
+                    ],
+                    hours: {
+                        weekday: '11–23',
+                        weekend: '10–01'
+                    },
+                    menu: {
+                        highlights: ['Pizza Napoletana', 'Pasta med tryffel', 'Vitello tonnato']
+                    },
+                    faq: [{ q: 'Har ni veganska alternativ?', a: 'Ja, vi erbjuder flera.' }]
+                }
+            };
+
+            const payload = detailsById[id];
+            if (!payload) {
+                return {
+                    content: [
+                        {
+                            type: 'text',
+                            text: JSON.stringify({ error: 'Restaurant not found', restaurantId })
+                        }
+                    ]
+                };
+            }
+
+            return {
+                content: [
+                    {
+                        type: 'text',
+                        text: JSON.stringify(payload)
+                    }
+                ]
+            };
+        }
+    );
+
     return server;
 }
